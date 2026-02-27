@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Board from "@/components/Board";
 import Keyboard from "@/components/Keyboard";
@@ -10,7 +10,7 @@ import LoadingScreen from "@/components/LoadingScreen";
 import { WORDS_IT, WORDS_EN, getRandomWord } from "@/lib/words";
 import { evaluateGuess, updateUsedColors } from "@/lib/gameLogic";
 
-export default function Play() {
+function PlayContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const queryLang = (searchParams.get('lang') === 'en' ? 'en' : 'it') as "it" | "en";
@@ -293,5 +293,13 @@ export default function Play() {
                 </button>
             )}
         </div>
+    );
+}
+
+export default function Play() {
+    return (
+        <Suspense fallback={<LoadingScreen />}>
+            <PlayContent />
+        </Suspense>
     );
 }
