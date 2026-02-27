@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Board from "@/components/Board";
 import Keyboard from "@/components/Keyboard";
-import LanguageDropdown from "@/components/LanguageDropdown";
+import HeaderPlayButton from "@/components/HeaderPlayButton";
 import Toaster, { useToast } from "@/components/Toaster";
 import LoadingScreen from "@/components/LoadingScreen";
 import { WORDS_IT, WORDS_EN, getRandomWord } from "@/lib/words";
@@ -41,17 +41,6 @@ export default function Play() {
             .catch(e => console.error("Error fetching coins", e));
     }, [answer, lang]);
 
-    const changeLanguage = (newLang: "it" | "en") => {
-        if (guesses.length > 0 && gameStatus === "IN_PROGRESS" && newLang !== lang) {
-            if (!confirm("Cambiare lingua azzererà la partita in corso. Procedere?")) {
-                return;
-            }
-        }
-        if (newLang !== lang) {
-            router.push(`/play?lang=${newLang}`);
-        }
-    };
-    
     // Explicit reset when user clicks Play Again or URL forces new load
     useEffect(() => {
         // If the queryLang is different from our local state, sync it and reset
@@ -238,9 +227,9 @@ export default function Play() {
                     </div>
                 </div>
 
-                {/* Center: language dropdown, truly centered */}
+                {/* Center: New Game button */}
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <LanguageDropdown lang={lang} onChange={changeLanguage} />
+                    <HeaderPlayButton />
                 </div>
 
                 {/* Right group: hint button — flex:1 justify end keeps it symmetric */}

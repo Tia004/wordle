@@ -4,7 +4,6 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import LogoutButton from './LogoutButton';
 import HeaderClientControls from './HeaderClientControls';
-import HeaderPlayButton from './HeaderPlayButton';
 
 export default async function SidebarPanel() {
     const session = await getServerSession(authOptions);
@@ -28,7 +27,6 @@ export default async function SidebarPanel() {
                     {session ? (
                         <>
                             <HeaderClientControls />
-                            <HeaderPlayButton />
                             <span className="hide-mobile" style={{ fontSize: '0.9rem', fontWeight: '800', color: 'var(--carrd-border)' }}>Ciao, {session.user?.name}!</span>
                             <LogoutButton />
                         </>

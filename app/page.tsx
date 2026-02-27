@@ -31,6 +31,7 @@ export default function Home() {
   const { data: session } = useSession();
   const { socket, connected } = useSocket();
   const [activeRoom, setActiveRoom] = useState<{roomId: string, mode: string} | null>(null);
+  const [showLangPicker, setShowLangPicker] = useState(false);
 
   useEffect(() => {
     if (!socket || !connected || !session?.user?.name) return;
@@ -90,7 +91,7 @@ export default function Home() {
       )}
 
       <div style={{ display: 'flex', gap: '0.7rem', justifyContent: 'center' }}>
-        <button style={cardStyle('var(--accent-pink)')} onClick={() => router.push('/play')}>
+        <button style={cardStyle('var(--accent-pink)')} onClick={() => setShowLangPicker(true)}>
           <IconSolo />
           <span>Singleplayer</span>
           <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--foreground)' }}>VS dizionario</span>
@@ -108,6 +109,33 @@ export default function Home() {
           <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--foreground)' }}>2-4 giocatori</span>
         </button>
       </div>
+
+      {showLangPicker && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(168,129,125,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+          <div style={{ background: 'var(--carrd-bg)', border: '4px solid var(--carrd-border)', borderRadius: '24px', padding: '1.5rem', textAlign: 'center', maxWidth: '280px', width: '90%', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
+            <div style={{ fontWeight: '800', fontSize: '1.1rem', color: 'var(--carrd-border)' }}>Scegli Lingua</div>
+            <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center', width: '100%' }}>
+              <button 
+                  onClick={() => router.push('/play?lang=it')} 
+                  style={{ ...cardStyle('white'), padding: '0.5rem', flex: 1 }}>
+                <span style={{ fontSize: '1.5rem' }}>🇮🇹</span>
+                <span>Italiano</span>
+              </button>
+              <button 
+                  onClick={() => router.push('/play?lang=en')} 
+                  style={{ ...cardStyle('white'), padding: '0.5rem', flex: 1 }}>
+                <span style={{ fontSize: '1.5rem' }}>🇬🇧</span>
+                <span>English</span>
+              </button>
+            </div>
+            <button 
+                onClick={() => setShowLangPicker(false)} 
+                style={{ background: 'var(--absent)', color: 'var(--carrd-border)', border: '3px solid var(--carrd-border)', padding: '0.4rem 1.1rem', borderRadius: '20px', fontWeight: '800', fontSize: '0.9rem', cursor: 'pointer', fontFamily: 'inherit' }}>
+              Annulla
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
