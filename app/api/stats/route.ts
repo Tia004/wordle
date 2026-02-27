@@ -10,7 +10,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ message: "Non autorizzato" }, { status: 401 });
         }
 
-        const { didWin, attempts } = await req.json();
+        const { didWin, attempts, multiplayerCoins } = await req.json();
 
         let stat = await prisma.gameStat.findUnique({
             where: { userId: session.user.id }
@@ -27,6 +27,15 @@ export async function POST(req: Request) {
                     winDistribution: JSON.stringify({ "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0 })
                 }
             });
+        }
+
+        // For multiplayer-only coin rewards (no stat update needed)
+        if (multiplayerCoins !== undefined) {
+            const updatedUser = await prisma.user.update({
+                where: { id: session.user.id },
+                data: { coins: { increment: multiplayerCoins } }
+            });
+            return NextResponse.json({ newTotalCoins: updatedUser.coins });
         }
 
         const dist = JSON.parse(stat.winDistribution);

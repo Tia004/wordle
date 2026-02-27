@@ -41,7 +41,7 @@ export default function Register() {
                 throw new Error("Errore durante l'accesso automatico");
             }
 
-            router.replace("/play");
+            router.replace("/");
             router.refresh();
         } catch (error: any) {
             setError(error.message);

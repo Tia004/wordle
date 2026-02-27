@@ -30,7 +30,7 @@ export default function Login() {
                 return;
             }
 
-            router.replace("/play");
+            router.replace("/");
             router.refresh();
         } catch (error) {
             setError("Si è verificato un errore.");
