@@ -344,29 +344,57 @@ a {
   }
 }
 
-/* ~iPhone SE landscape / small-height windows */
-@media (max-width: 430px), (max-height: 750px) {
+@media (max-width: 640px) {
   :root {
-    --board-tile-size: 40px;
-    --board-gap: 0.25rem;
-    --key-height: 40px;
-    --key-gap: 0.15rem;
-    --header-padding: 0.8rem 0.5rem;
-    --logo-width: 140px;
+    --board-tile-size: min(15.5vw, 6.8dvh);
+    --board-gap: 1.5vw;
+    --key-height: min(11vw, 7dvh);
+    --key-gap: 1vw;
+    --header-padding: 0.5rem 0.5rem;
+    --logo-width: min(40vw, 150px);
     --main-padding: 0.3rem;
     --nav-padding: 0.2rem 0.4rem;
   }
 }
 
-@media (max-height: 670px) {
-  :root {
-    --board-tile-size: 34px;
-    --board-gap: 0.2rem;
-    --key-height: 36px;
-    --key-gap: 0.12rem;
-    --header-padding: 0.4rem 0.4rem;
-    --logo-width: 110px;
-    --main-padding: 0.1rem;
-    --nav-padding: 0.1rem 0.3rem;
+/* --- Landscape Mode Blocker --- */
+#landscape-blocker {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: var(--carrd-bg);
+  background-image: url('/wallpaper_mobile.jpg');
+  background-size: cover;
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  color: var(--foreground);
+}
+
+#landscape-blocker h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+#landscape-blocker h2 {
+  font-size: 1.5rem;
+  color: var(--carrd-border);
+  margin-bottom: 0.5rem;
+}
+
+#landscape-blocker p {
+  font-size: 1rem;
+  max-width: 400px;
+}
+
+@media screen and (max-width: 950px) and (max-height: 600px) and (orientation: landscape) {
+  #landscape-blocker {
+    display: flex;
+  }
+  .app-shell {
+    display: none;
   }
 }

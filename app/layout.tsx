@@ -20,6 +20,13 @@ export default function RootLayout({
       <body>
         <SessionProviderWrapper>
           <LoadingScreen />
+          <div id="landscape-blocker">
+            <div>
+              <h1>⚠️</h1>
+              <h2>Ehi! Gira il telefono.</h2>
+              <p>Il gioco è supportato solamente in verticale (Portrait).</p>
+            </div>
+          </div>
           {/* Outer wrapper — row on desktop, column on mobile */}
           <div className="app-shell">
             {/* LEFT: Striped logo panel */}
