@@ -29,7 +29,7 @@ export default async function SidebarPanel() {
                         <>
                             <HeaderClientControls />
                             <HeaderPlayButton />
-                            <span style={{ fontSize: '0.9rem', fontWeight: '800', color: 'var(--carrd-border)' }}>Ciao, {session.user?.name}!</span>
+                            <span className="hide-mobile" style={{ fontSize: '0.9rem', fontWeight: '800', color: 'var(--carrd-border)' }}>Ciao, {session.user?.name}!</span>
                             <LogoutButton />
                         </>
                     ) : (

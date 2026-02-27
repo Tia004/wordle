@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Board from "@/components/Board";
 import Keyboard from "@/components/Keyboard";
 import LanguageDropdown from "@/components/LanguageDropdown";
@@ -10,7 +11,11 @@ import { WORDS_IT, WORDS_EN, getRandomWord } from "@/lib/words";
 import { evaluateGuess, updateUsedColors } from "@/lib/gameLogic";
 
 export default function Play() {
-    const [lang, setLang] = useState<"it" | "en">("it");
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const queryLang = (searchParams.get('lang') === 'en' ? 'en' : 'it') as "it" | "en";
+
+    const [lang, setLang] = useState<"it" | "en">(queryLang);
     const [answer, setAnswer] = useState("");
     const [guesses, setGuesses] = useState<string[]>([]);
     const [currentGuess, setCurrentGuess] = useState("");
@@ -43,14 +48,22 @@ export default function Play() {
             }
         }
         if (newLang !== lang) {
-            setLang(newLang);
-            setAnswer(getRandomWord(newLang));
+            router.push(`/play?lang=${newLang}`);
+        }
+    };
+    
+    // Explicit reset when user clicks Play Again or URL forces new load
+    useEffect(() => {
+        // If the queryLang is different from our local state, sync it and reset
+        if (queryLang !== lang) {
+            setLang(queryLang);
+            setAnswer(getRandomWord(queryLang));
             setGuesses([]);
             setUsedColors({});
             setGameStatus("IN_PROGRESS");
             setCurrentGuess("");
         }
-    };
+    }, [queryLang, lang]);
 
     const resetGame = () => {
         setAnswer(getRandomWord(lang));

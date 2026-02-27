@@ -136,7 +136,8 @@ body {
 
 .game-main {
   flex: 1;
-  overflow: hidden; /* NO internal scroll ever */
+  overflow-y: auto; /* Safety net if scaling gets too inflated by browser fonts */
+  overflow-x: hidden;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -183,6 +184,10 @@ body {
     flex: 1;
     min-height: 0;
     border-radius: 16px;
+  }
+
+  .hide-mobile {
+    display: none !important;
   }
 }
 
@@ -346,13 +351,13 @@ a {
 
 @media (max-width: 640px) {
   :root {
-    --board-tile-size: min(15.5vw, 6.8dvh);
-    --board-gap: 1.5vw;
-    --key-height: min(11vw, 7dvh);
-    --key-gap: 1vw;
-    --header-padding: 0.5rem 0.5rem;
-    --logo-width: min(40vw, 150px);
-    --main-padding: 0.3rem;
+    --board-tile-size: min(14.5vw, 6dvh);
+    --board-gap: min(1.5vw, 1.2dvh);
+    --key-height: min(10vw, 5.5dvh);
+    --key-gap: min(1vw, 0.8dvh);
+    --header-padding: 0.2rem 0.2rem;
+    --logo-width: min(35vw, 120px);
+    --main-padding: 0.2rem;
     --nav-padding: 0.2rem 0.4rem;
   }
 }

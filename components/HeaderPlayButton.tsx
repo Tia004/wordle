@@ -35,14 +35,25 @@ export default function HeaderPlayButton() {
     const pathname = usePathname();
     const router = useRouter();
     const [showPicker, setShowPicker] = useState(false);
+    const [showLangPicker, setShowLangPicker] = useState(false);
     const [pending, setPending] = useState<'/play' | '/multiplayer' | null>(null);
 
     // Only show when a game is in progress (/play)
     if (pathname !== '/play') return null;
 
-    const pick = (dest: '/play' | '/multiplayer') => {
-        setPending(dest);
-        setShowPicker(false);
+    const pickMode = (dest: '/play' | '/multiplayer') => {
+        if (dest === '/play') {
+            setShowPicker(false);
+            setShowLangPicker(true);
+        } else {
+            setPending(dest);
+            setShowPicker(false);
+        }
+    };
+
+    const confirmLang = (lang: 'it' | 'en') => {
+        setShowLangPicker(false);
+        router.push(`/play?lang=${lang}`);
     };
 
     const confirm = () => {
@@ -112,10 +123,10 @@ export default function HeaderPlayButton() {
                     <div style={modalStyle}>
                         <div style={{ fontWeight: '800', fontSize: '1rem', color: 'var(--carrd-border)' }}>Scegli modalità</div>
                         <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center' }}>
-                            <button style={cardStyle('var(--accent-pink)')} onClick={() => pick('/play')}>
+                            <button style={cardStyle('var(--accent-pink)')} onClick={() => pickMode('/play')}>
                                 <IconSolo /><span>Singleplayer</span>
                             </button>
-                            <button style={cardStyle('var(--accent-blue)')} onClick={() => pick('/multiplayer')}>
+                            <button style={cardStyle('var(--accent-blue)')} onClick={() => pickMode('/multiplayer')}>
                                 <IconSwords /><span>1v1</span>
                             </button>
                         </div>
@@ -126,7 +137,29 @@ export default function HeaderPlayButton() {
                 </div>
             )}
 
-            {/* Step 2 — Confirm (buttons forced to single row) */}
+            {/* Step 1.5 — Select Language for Singleplayer */}
+            {showLangPicker && (
+                <div style={{ ...overlayStyle, zIndex: 1001 }}>
+                    <div style={{ ...modalStyle, maxWidth: '280px' }}>
+                        <div style={{ fontWeight: '800', fontSize: '1rem', color: 'var(--carrd-border)' }}>Scegli Lingua</div>
+                        <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center', width: '100%' }}>
+                            <button onClick={() => confirmLang('it')} style={{ ...cardStyle('white'), flex: 1 }}>
+                                <span style={{ fontSize: '1.5rem' }}>🇮🇹</span>
+                                <span>Italiano</span>
+                            </button>
+                            <button onClick={() => confirmLang('en')} style={{ ...cardStyle('white'), flex: 1 }}>
+                                <span style={{ fontSize: '1.5rem' }}>🇬🇧</span>
+                                <span>English</span>
+                            </button>
+                        </div>
+                        <button onClick={() => setShowLangPicker(false)} style={{ ...btnStyle, fontSize: '0.8rem', padding: '0.3rem 1rem', justifyContent: 'center' }}>
+                            <IconX /> Indietro
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {/* Step 2 — Confirm (buttons forced to single row) - Only used for Multiplayer now */}
             {pending && (
                 <div style={{ ...overlayStyle, zIndex: 1001 }}>
                     <div style={{ ...modalStyle, maxWidth: '260px' }}>
