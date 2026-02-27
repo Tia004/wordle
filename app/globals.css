@@ -320,6 +320,9 @@ a {
   --board-gap: 0.6rem;
   --key-height: 58px;
   --key-gap: 0.4rem;
+  --key-font-size: 1.2rem;
+  --key-action-font-size: 1rem;
+  --key-padding: 0 0.5rem;
   --header-padding: 3rem 1rem;
   --logo-width: 220px;
   --main-padding: 1rem;
@@ -355,6 +358,9 @@ a {
     --board-gap: min(1.5vw, 1.2dvh);
     --key-height: min(10vw, 5.5dvh);
     --key-gap: min(1vw, 0.8dvh);
+    --key-font-size: min(4.5vw, 1.1rem);
+    --key-action-font-size: min(2.8vw, 0.85rem);
+    --key-padding: 0 0.1rem;
     --header-padding: 0.2rem 0.2rem;
     --logo-width: min(35vw, 120px);
     --main-padding: 0.2rem;

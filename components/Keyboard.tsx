@@ -30,17 +30,18 @@ export default function Keyboard({ onChar, onDelete, onEnter, usedColors }: { on
                                 style={{
                                     flex: isAction ? 1.5 : 1,
                                     height: 'var(--key-height)',
+                                    minWidth: 0, // Allows aggressive shrinking below text size
                                     borderRadius: '16px', // Extra rounded for bubble feel
                                     border: '2px solid var(--carrd-border)',
                                     background: bgClass,
                                     color: textColor,
                                     fontWeight: 'bold',
-                                    fontSize: isAction ? '1rem' : '1.2rem',
+                                    fontSize: isAction ? 'var(--key-action-font-size)' : 'var(--key-font-size)',
                                     cursor: 'pointer',
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                    padding: '0 0.5rem',
+                                    padding: 'var(--key-padding)',
                                     boxShadow: 'none' // Strictly flat
                                 }}
                             >
