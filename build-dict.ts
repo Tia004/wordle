@@ -2,7 +2,7 @@ import fs from 'fs';
 import https from 'https';
 import path from 'path';
 
-const IT_URL = 'https://raw.githubusercontent.com/napolux/paroleitaliane/main/paroleitaliane/parole_uniche.txt';
+const IT_URL = 'https://raw.githubusercontent.com/napolux/paroleitaliane/main/paroleitaliane/60000_parole_italiane.txt';
 const EN_URL = 'https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt';
 
 const fetchFile = (url: string): Promise<string> => {

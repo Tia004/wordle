@@ -4,7 +4,7 @@ export default function Board({ guesses, currentGuess, answer, shakeRow }: { gue
     const empties = guesses.length < 6 ? Array(5 - guesses.length).fill('') : [];
 
     return (
-        <div style={{ display: 'grid', gridTemplateRows: 'repeat(6, 1fr)', gap: 'var(--board-gap)', marginBottom: '1rem', flexShrink: 1 }}>
+        <div style={{ display: 'grid', gridTemplateRows: 'repeat(6, 1fr)', gap: 'var(--board-gap)', marginBottom: '1rem', flexShrink: 0 }}>
             {/* Actual Game Rows */}
             {guesses.map((guess, i) => (
                 <Row key={i} word={guess} submitted={true} answer={answer} rowIndex={i} />

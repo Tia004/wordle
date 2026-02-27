@@ -6,9 +6,9 @@ export default function Keyboard({ onChar, onDelete, onEnter, usedColors }: { on
     ];
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--key-gap)', width: '100%', maxWidth: '500px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--key-gap)', width: '100%', maxWidth: '500px', margin: '0 auto', flexShrink: 0 }}>
             {rows.map((row, i) => (
-                <div key={i} style={{ display: 'flex', justifyContent: 'center', gap: 'var(--key-gap)' }}>
+                <div key={i} style={{ display: 'flex', justifyContent: 'center', gap: 'var(--key-gap)', flexShrink: 0 }}>
                     {row.map(key => {
                         const bgClass = usedColors[key] === 'CORRECT' ? 'var(--primary)' :
                             usedColors[key] === 'PRESENT' ? 'var(--secondary)' :
