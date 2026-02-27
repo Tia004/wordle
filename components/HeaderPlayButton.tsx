@@ -12,12 +12,13 @@ export default function HeaderPlayButton() {
     return (
         <a href="/play" style={{ 
             background: 'white', 
-            border: '2px solid var(--carrd-border)', 
-            padding: '0.4rem 1rem', 
-            borderRadius: '12px', 
             color: 'var(--carrd-border)', 
-            textDecoration: 'none',
-            fontWeight: 'bold'
+            border: '3px solid var(--carrd-border)', 
+            padding: '0.4rem 1.2rem', 
+            borderRadius: '20px', 
+            fontWeight: '800', 
+            fontSize: '0.9rem', 
+            textDecoration: 'none'
         }}>
             Nuova partita
         </a>

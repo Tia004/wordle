@@ -5,7 +5,7 @@ export default function LogoutButton() {
     return (
         <button
             onClick={() => signOut({ callbackUrl: '/' })}
-            style={{ background: 'var(--absent)', color: 'white', border: 'none', padding: '0.4rem 0.8rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+            style={{ background: 'white', color: 'var(--carrd-border)', border: '3px solid var(--carrd-border)', padding: '0.4rem 1.2rem', borderRadius: '20px', fontWeight: '800', fontSize: '0.9rem', cursor: 'pointer', fontFamily: 'inherit' }}>
             Esci
         </button>
     );

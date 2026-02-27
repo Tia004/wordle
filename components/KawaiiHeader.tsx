@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import LogoutButton from './LogoutButton';
 import HeaderClientControls from './HeaderClientControls';
+import HeaderPlayButton from './HeaderPlayButton';
 
 export default async function KawaiiHeader() {
     const session = await getServerSession(authOptions);
@@ -45,14 +46,14 @@ export default async function KawaiiHeader() {
                     {session ? (
                         <>
                             <HeaderClientControls />
-                            <Link href="/play" style={{ background: 'white', border: '2px solid var(--carrd-border)', padding: '0.4rem 1rem', borderRadius: '12px' }}>Play</Link>
-                            <span>Hi, {session.user?.name}</span>
+                            <HeaderPlayButton />
+                            <span style={{ fontSize: '1rem', fontWeight: '800' }}>Ciao, {session.user?.name}!</span>
                             <LogoutButton />
                         </>
                     ) : (
                         <>
-                            <Link href="/login" style={{ background: 'white', border: '2px solid var(--carrd-border)', padding: '0.4rem 1rem', borderRadius: '12px' }}>Login</Link>
-                            <Link href="/register" style={{ background: 'var(--accent-pink)', color: 'white', border: '2px solid var(--carrd-border)', padding: '0.4rem 1rem', borderRadius: '12px' }}>Register</Link>
+                            <Link href="/login" style={{ background: 'white', color: 'var(--carrd-border)', border: '3px solid var(--carrd-border)', padding: '0.4rem 1.2rem', borderRadius: '20px', fontWeight: '800', fontSize: '0.9rem', textDecoration: 'none' }}>Login</Link>
+                            <Link href="/register" style={{ background: 'var(--accent-pink)', color: 'white', border: '3px solid var(--carrd-border)', padding: '0.4rem 1.2rem', borderRadius: '20px', fontWeight: '800', fontSize: '0.9rem', textDecoration: 'none' }}>Register</Link>
                         </>
                     )}
                 </nav>
