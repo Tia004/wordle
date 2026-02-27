@@ -2,7 +2,7 @@ import fs from 'fs';
 import https from 'https';
 import path from 'path';
 
-const IT_URL_ANSWERS = 'https://raw.githubusercontent.com/napolux/paroleitaliane/main/paroleitaliane/60000_parole_italiane.txt';
+const IT_URL_ANSWERS = 'https://raw.githubusercontent.com/par-le/gioco/main/src/constants/wordlist.ts';
 const IT_URL_GUESSES = 'https://raw.githubusercontent.com/napolux/paroleitaliane/main/paroleitaliane/parole_uniche.txt';
 const EN_URL = 'https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt';
 
@@ -16,7 +16,13 @@ const fetchFile = (url: string): Promise<string> => {
     });
 };
 
-const filterWords = (data: string): string[] => {
+const filterWords = (data: string, format: 'json-array' | 'lines'): string[] => {
+    if (format === 'json-array') {
+        const matches = Array.from(data.matchAll(/['"]([a-zA-Zèéòàùì]{5})['"]/g));
+        return Array.from(new Set(matches.map(m => m[1].replace(/[èéòàùì]/g, '').toUpperCase()))).filter(w => w.length === 5);
+    }
+
+    // Fallback for raw text line-by-line format
     const lines = data.split(/\r?\n/);
     const words = lines
         .map(w => w.trim().toUpperCase())
@@ -29,17 +35,17 @@ const filterWords = (data: string): string[] => {
 async function main() {
     console.log('Fetching Italian answers...');
     const itAnswersData = await fetchFile(IT_URL_ANSWERS);
-    const itAnswers = filterWords(itAnswersData);
+    const itAnswers = filterWords(itAnswersData, 'json-array');
     console.log(`Found ${itAnswers.length} Italian 5-letter answer words.`);
 
     console.log('Fetching Italian guesses...');
     const itGuessesData = await fetchFile(IT_URL_GUESSES);
-    const itGuesses = filterWords(itGuessesData);
+    const itGuesses = filterWords(itGuessesData, 'lines');
     console.log(`Found ${itGuesses.length} Italian 5-letter valid guess words.`);
 
     console.log('Fetching English words...');
     const enData = await fetchFile(EN_URL);
-    const enWords = filterWords(enData);
+    const enWords = filterWords(enData, 'lines');
     console.log(`Found ${enWords.length} English 5-letter words.`);
 
     const tsContent = `// Auto-generated dictionaries
