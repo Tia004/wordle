@@ -43,7 +43,7 @@
 body {
   font-family: 'Quicksand', sans-serif;
   color: var(--foreground);
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   margin: 0;
   display: flex;
@@ -64,9 +64,9 @@ body {
   flex-direction: row;
   align-items: stretch;
   gap: 1rem;
-  height: calc(100vh - 4vh * 2);
-  max-height: calc(100vh - 4vh * 2);
-  padding: 2vh 1rem;
+  height: calc(100dvh - 4dvh * 2);
+  max-height: calc(100dvh - 4dvh * 2);
+  padding: 2dvh 1rem;
   width: 100%;
   max-width: 1000px;
   box-sizing: border-box;
@@ -152,9 +152,9 @@ body {
   .app-shell {
     flex-direction: column;
     gap: 0.5rem;
-    padding: 1vh 0.4rem;
-    height: 100vh;
-    max-height: 100vh;
+    padding: 1dvh 0.4rem;
+    height: 100dvh;
+    max-height: 100dvh;
   }
 
   .sidebar-panel {
@@ -345,28 +345,28 @@ a {
 }
 
 /* ~iPhone SE landscape / small-height windows */
-@media (max-width: 400px), (max-height: 750px) {
+@media (max-width: 430px), (max-height: 750px) {
   :root {
-    --board-tile-size: 42px;
-    --board-gap: 0.3rem;
-    --key-height: 44px;
-    --key-gap: 0.2rem;
-    --header-padding: 1.2rem 1rem;
-    --logo-width: 160px;
-    --main-padding: 0.4rem;
-    --nav-padding: 0.3rem 0.5rem;
+    --board-tile-size: 40px;
+    --board-gap: 0.25rem;
+    --key-height: 40px;
+    --key-gap: 0.15rem;
+    --header-padding: 0.8rem 0.5rem;
+    --logo-width: 140px;
+    --main-padding: 0.3rem;
+    --nav-padding: 0.2rem 0.4rem;
   }
 }
 
-@media (max-height: 650px) {
+@media (max-height: 670px) {
   :root {
     --board-tile-size: 34px;
-    --board-gap: 0.18rem;
+    --board-gap: 0.2rem;
     --key-height: 36px;
     --key-gap: 0.12rem;
-    --header-padding: 0.6rem 0.5rem;
-    --logo-width: 130px;
-    --main-padding: 0.15rem;
-    --nav-padding: 0.15rem 0.4rem;
+    --header-padding: 0.4rem 0.4rem;
+    --logo-width: 110px;
+    --main-padding: 0.1rem;
+    --nav-padding: 0.1rem 0.3rem;
   }
 }
