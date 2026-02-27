@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
+  createdAt     DateTime  @default(now())
+  stats         GameStat?
+  states        GameState?
+}
+
+model GameStat {
+  id              String  @id @default(cuid())
+  userId          String  @unique
+  user            User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  played          Int     @default(0)
+  wins            Int     @default(0)
+  currentStreak   Int     @default(0)
+  maxStreak       Int     @default(0)
+  winDistribution String  @default("{\"1\":0,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0}")
+}
+
+model GameState {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  boardState     String   @default("[]") // JSON array of guesses
+  currentRow     Int      @default(0)
+  gameStatus     String   @default("IN_PROGRESS") // "IN_PROGRESS", "WIN", "FAIL"
+  lastPlayedDate String   // "YYYY-MM-DD"
+}

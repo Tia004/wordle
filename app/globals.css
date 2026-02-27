@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+:root {
+  /* Kawaii Pastel Palette */
+  --bg-check-1: #e2f4fb;
+  /* Baby blue */
+  --bg-check-2: #fff5fa;
+  /* Very light pink */
+
+  --carrd-bg: #fffdf5;
+  /* Off-white warm */
+  --carrd-border: #a8817d;
+  /* Soft dark brown for outlines */
+  --carrd-header-bg: #ffe4e1;
+  /* Pastel pink dome */
+
+  /* Wordle Colors */
+  --primary: #aae0b8;
+  /* Mint green */
+  --secondary: #fdf2a6;
+  /* Butter yellow */
+  --absent: #d1d5db;
+  /* Baby gray */
+
+  --key-bg: #fff5fa;
+  /* Keys base */
+  --key-text: #a8817d;
+  /* Dark brown text */
+  --foreground: #8a6a66;
+  /* Main text color */
+
+  --accent-pink: #ffb7b2;
+  --accent-blue: #a2e1db;
+  --accent-green: #bceea4;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  color: var(--foreground);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Blurred checkered pastel background */
+  background-image:
+    linear-gradient(45deg, var(--bg-check-1) 25%, transparent 25%, transparent 75%, var(--bg-check-1) 75%, var(--bg-check-1)),
+    linear-gradient(45deg, var(--bg-check-1) 25%, transparent 25%, transparent 75%, var(--bg-check-1) 75%, var(--bg-check-1));
+  background-color: var(--bg-check-2);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  padding: 2rem 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Base Utility Classes */
+.flat-border {
+  border: 3px solid var(--carrd-border);
+  border-radius: 12px;
+}
+
+.scalloped-bottom {
+  position: relative;
+  z-index: 1;
+}
+
+/* SVG Scallop Mask */
+.scalloped-bottom::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  background-image: radial-gradient(circle at 10px 0, transparent 10px, var(--carrd-header-bg) 11px);
+  background-size: 20px 100%;
+  background-position: 0 0;
+  z-index: -1;
+}
+
+.scalloped-container {
+  position: relative;
+}
+
+/* The scalloped frame around the main carrd container */
+.scalloped-container::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  background-image: radial-gradient(circle at 10px 10px, var(--carrd-bg) 10px, transparent 11px);
+  background-size: 20px 20px;
+  z-index: -1;
+  border-radius: 30px;
+}
+
+/* Hide scrollbar for the carrd container */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-check-2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-pink);
+  border-radius: 4px;
+}
