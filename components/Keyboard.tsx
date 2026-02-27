@@ -44,7 +44,7 @@ export default function Keyboard({ onChar, onDelete, onEnter, usedColors }: { on
                                     boxShadow: 'none' // Strictly flat
                                 }}
                             >
-                                {key === 'ENTER' ? '🌸' : key === 'DEL' ? '✖️' : key}
+                                {key === 'ENTER' ? 'ENTER' : key === 'DEL' ? 'DEL' : key}
                             </button>
                         );
                     })}

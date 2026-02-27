@@ -13,6 +13,7 @@ model User {
   email         String    @unique
   password      String
   createdAt     DateTime  @default(now())
+  coins         Int       @default(300)
   stats         GameStat?
   states        GameState?
 }
@@ -36,4 +37,5 @@ model GameState {
   currentRow     Int      @default(0)
   gameStatus     String   @default("IN_PROGRESS") // "IN_PROGRESS", "WIN", "FAIL"
   lastPlayedDate String   // "YYYY-MM-DD"
+  rewardState    String   @default("[]") // JSON array to track rewarded insights
 }

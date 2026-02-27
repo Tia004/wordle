@@ -48,7 +48,16 @@ export async function POST(req: Request) {
             }
         });
 
-        return NextResponse.json(updatedStat);
+        let newTotalCoins = undefined;
+        if (didWin) {
+            const updatedUser = await prisma.user.update({
+                where: { id: session.user.id },
+                data: { coins: { increment: 100 } }
+            });
+            newTotalCoins = updatedUser.coins;
+        }
+
+        return NextResponse.json({ ...updatedStat, newTotalCoins });
     } catch (error) {
         console.error("Save stats error:", error);
         return NextResponse.json({ message: "Errore interno" }, { status: 500 });
