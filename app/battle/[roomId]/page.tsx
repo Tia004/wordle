@@ -8,6 +8,7 @@ import { useSocket } from "@/hooks/useSocket";
 import Board from "@/components/Board";
 import Keyboard from "@/components/Keyboard";
 import { evaluateGuess, updateUsedColors } from "@/lib/gameLogic";
+import { WORDS_IT_GUESSES, WORDS_EN } from "@/lib/words";
 
 type Player = { id: string; name: string; score: number; roundPoints?: number };
 type Phase = "waiting" | "playing" | "round_end" | "game_end";
@@ -213,6 +214,13 @@ export default function BattleRoom() {
     const onEnter = () => {
         if (gameStatus !== "IN_PROGRESS" || currentGuess.length !== 5 || finishedRef.current) return;
         const guess = currentGuess.toUpperCase();
+        
+        const dict = lang === 'en' ? WORDS_EN : WORDS_IT_GUESSES;
+        if (!dict.includes(guess)) {
+            showToast(lang === 'it' ? "Parola non valida" : "Invalid word");
+            return;
+        }
+
         const newGuesses = [...guesses, guess];
         setGuesses(newGuesses);
         socket?.emit("battle_submit_guess", { guess });

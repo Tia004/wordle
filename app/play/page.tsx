@@ -7,7 +7,7 @@ import Keyboard from "@/components/Keyboard";
 import HeaderPlayButton from "@/components/HeaderPlayButton";
 import Toaster, { useToast } from "@/components/Toaster";
 import LoadingScreen from "@/components/LoadingScreen";
-import { WORDS_IT, WORDS_EN, getRandomWord } from "@/lib/words";
+import { WORDS_IT, WORDS_IT_GUESSES, WORDS_EN, getRandomWord } from "@/lib/words";
 import { evaluateGuess, updateUsedColors } from "@/lib/gameLogic";
 
 function PlayContent() {
@@ -139,7 +139,7 @@ function PlayContent() {
             return;
         }
 
-        const activeDict = lang === 'it' ? WORDS_IT : WORDS_EN;
+        const activeDict = lang === 'it' ? WORDS_IT_GUESSES : WORDS_EN;
         if (!activeDict.includes(currentGuess)) {
             showToast(lang === 'it' ? "Parola non nel dizionario" : "Word not in dictionary");
             triggerShake();

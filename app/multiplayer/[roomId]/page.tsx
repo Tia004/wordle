@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useSocket } from "@/hooks/useSocket";
 import { evaluateGuess, updateUsedColors } from "@/lib/gameLogic";
-import { WORDS_IT, WORDS_EN } from "@/lib/words";
+import { WORDS_IT, WORDS_IT_GUESSES, WORDS_EN } from "@/lib/words";
 import Board from "@/components/Board";
 import Keyboard from "@/components/Keyboard";
 import Toaster, { useToast } from "@/components/Toaster";
@@ -286,7 +286,7 @@ export default function MultiplayerGame() {
     const onEnter = useCallback(() => {
         if (myGameStatus !== 'IN_PROGRESS' || phase !== 'playing') return;
         if (myCurrentGuess.length !== 5) { triggerShake(); showToast('5 lettere!'); return; }
-        const dict = lang === 'en' ? WORDS_EN : WORDS_IT;
+        const dict = lang === 'en' ? WORDS_EN : WORDS_IT_GUESSES;
         if (!dict.includes(myCurrentGuess)) {
             triggerShake(); showToast('Parola non nel dizionario!'); return;
         }

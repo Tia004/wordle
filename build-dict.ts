@@ -2,7 +2,8 @@ import fs from 'fs';
 import https from 'https';
 import path from 'path';
 
-const IT_URL = 'https://raw.githubusercontent.com/napolux/paroleitaliane/main/paroleitaliane/60000_parole_italiane.txt';
+const IT_URL_ANSWERS = 'https://raw.githubusercontent.com/napolux/paroleitaliane/main/paroleitaliane/60000_parole_italiane.txt';
+const IT_URL_GUESSES = 'https://raw.githubusercontent.com/napolux/paroleitaliane/main/paroleitaliane/parole_uniche.txt';
 const EN_URL = 'https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt';
 
 const fetchFile = (url: string): Promise<string> => {
@@ -26,10 +27,15 @@ const filterWords = (data: string): string[] => {
 };
 
 async function main() {
-    console.log('Fetching Italian words...');
-    const itData = await fetchFile(IT_URL);
-    const itWords = filterWords(itData);
-    console.log(`Found ${itWords.length} Italian 5-letter words.`);
+    console.log('Fetching Italian answers...');
+    const itAnswersData = await fetchFile(IT_URL_ANSWERS);
+    const itAnswers = filterWords(itAnswersData);
+    console.log(`Found ${itAnswers.length} Italian 5-letter answer words.`);
+
+    console.log('Fetching Italian guesses...');
+    const itGuessesData = await fetchFile(IT_URL_GUESSES);
+    const itGuesses = filterWords(itGuessesData);
+    console.log(`Found ${itGuesses.length} Italian 5-letter valid guess words.`);
 
     console.log('Fetching English words...');
     const enData = await fetchFile(EN_URL);
@@ -38,7 +44,9 @@ async function main() {
 
     const tsContent = `// Auto-generated dictionaries
 
-export const WORDS_IT = ${JSON.stringify(itWords, null, 2)};
+export const WORDS_IT = ${JSON.stringify(itAnswers, null, 2)};
+
+export const WORDS_IT_GUESSES = ${JSON.stringify(itGuesses, null, 2)};
 
 export const WORDS_EN = ${JSON.stringify(enWords, null, 2)};
 
