@@ -4,7 +4,7 @@ export default function Board({ guesses, currentGuess, answer, shakeRow }: { gue
     const empties = guesses.length < 6 ? Array(5 - guesses.length).fill('') : [];
 
     return (
-        <div style={{ display: 'grid', gridTemplateRows: 'repeat(6, 1fr)', gap: '0.6rem', marginBottom: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateRows: 'repeat(6, 1fr)', gap: 'var(--board-gap)', marginBottom: '1rem', flexShrink: 1 }}>
             {/* Actual Game Rows */}
             {guesses.map((guess, i) => (
                 <Row key={i} word={guess} submitted={true} answer={answer} rowIndex={i} />
@@ -26,7 +26,7 @@ function Row({ word, submitted, answer, rowIndex = 0, overrideColors }: { word: 
     const evaluation = submitted ? (overrideColors || evaluateGuess(word, answer)) : Array(5).fill('');
 
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.6rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 'var(--board-gap)' }}>
             {letters.map((letter, i) => {
                 const isSubmitted = submitted;
                 const status = overrideColors ? overrideColors[i] : evaluation[i];
@@ -40,8 +40,8 @@ function Row({ word, submitted, answer, rowIndex = 0, overrideColors }: { word: 
                         key={i}
                         className={isSubmitted && letter !== '' ? 'tile-flip' : ''}
                         style={{
-                            width: '58px',
-                            height: '58px',
+                            width: 'var(--board-tile-size)',
+                            height: 'var(--board-tile-size)',
                             border: `3px solid ${isSubmitted ? bgClass : 'var(--carrd-border)'}`,
                             borderRadius: '16px', // Rounded squares for kawaii aesthetic
                             display: 'flex',

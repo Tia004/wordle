@@ -43,18 +43,25 @@
 body {
   font-family: 'Quicksand', sans-serif;
   color: var(--foreground);
-  min-height: 100vh;
+  height: 100vh;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Blurred checkered pastel background */
-  background-image:
-    linear-gradient(45deg, var(--bg-check-1) 25%, transparent 25%, transparent 75%, var(--bg-check-1) 75%, var(--bg-check-1)),
-    linear-gradient(45deg, var(--bg-check-1) 25%, transparent 25%, transparent 75%, var(--bg-check-1) 75%, var(--bg-check-1));
-  background-color: var(--bg-check-2);
-  background-size: 40px 40px;
-  background-position: 0 0, 20px 20px;
-  padding: 2rem 1rem;
+  overflow: hidden; /* Force NO scrolling globally */
+  background-color: var(--carrd-bg);
+  background-image: url('/wallpaper_desktop.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 4vh 1rem; /* Top/bottom margin, 1rem sides */
+}
+
+@media (max-width: 600px) {
+  body {
+    background-image: url('/wallpaper_mobile.jpg');
+    padding: 2vh 0.5rem; /* Smaller margins on mobile */
+  }
 }
 
 a {
@@ -176,5 +183,44 @@ a {
   100% {
     transform: translate(-50%, -30px);
     opacity: 0;
+  }
+}
+
+/* Base Sizing Constants for Board & Keyboard */
+:root {
+  --board-tile-size: 58px;
+  --board-gap: 0.6rem;
+  --key-height: 58px;
+  --key-gap: 0.4rem;
+  --header-padding: 3rem 1rem;
+  --logo-width: 300px;
+  --main-padding: 1rem;
+  --nav-padding: 0.8rem 1rem;
+}
+
+/* Extra small height/width clamps (iPhone SE / tight windows) */
+@media (max-width: 400px), (max-height: 750px) {
+  :root {
+    --board-tile-size: 45px !important;
+    --board-gap: 0.3rem !important;
+    --key-height: 48px !important;
+    --key-gap: 0.2rem !important;
+    --header-padding: 1.2rem 1rem !important;
+    --logo-width: 180px !important;
+    --main-padding: 0.5rem !important;
+    --nav-padding: 0.3rem 0.5rem !important;
+  }
+}
+
+@media (max-height: 650px) {
+  :root {
+    --board-tile-size: 34px !important;
+    --board-gap: 0.2rem !important;
+    --key-height: 38px !important;
+    --key-gap: 0.15rem !important;
+    --header-padding: 0.6rem 0.5rem !important;
+    --logo-width: 140px !important;
+    --main-padding: 0.2rem !important;
+    --nav-padding: 0.2rem 0.5rem !important;
   }
 }

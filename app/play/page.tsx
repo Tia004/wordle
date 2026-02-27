@@ -5,6 +5,7 @@ import Board from "@/components/Board";
 import Keyboard from "@/components/Keyboard";
 import LanguageDropdown from "@/components/LanguageDropdown";
 import Toaster, { useToast } from "@/components/Toaster";
+import LoadingScreen from "@/components/LoadingScreen";
 import { WORDS_IT, WORDS_EN, getRandomWord } from "@/lib/words";
 import { evaluateGuess, updateUsedColors } from "@/lib/gameLogic";
 
@@ -195,15 +196,15 @@ export default function Play() {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [currentGuess, gameStatus, answer, lang, usedColors, coins]); // Dependencies updated
 
-    if (!answer) return <div>Caricamento...</div>;
+    if (!answer) return <LoadingScreen />;
 
     return (
-        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', padding: '1rem', maxWidth: '500px' }}>
+        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '500px' }}>
 
             <Toaster message={toastMessage} onClose={() => { }} />
 
             {/* Top Bar with Language Selector and Coins */}
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--board-gap)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'white', padding: '0.4rem 1rem', borderRadius: '20px', border: '3px solid var(--carrd-border)', fontWeight: 'bold', color: 'var(--carrd-border)' }}>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="#FCD34D" stroke="#D97706" strokeWidth="2">
                         <circle cx="12" cy="12" r="10"></circle>

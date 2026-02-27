@@ -20,13 +20,13 @@ export default async function KawaiiHeader() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                padding: '3rem 1rem', // Increased padding to make room for a bigger logo
+                padding: 'var(--header-padding)',
                 /* Cute striped background for the roof */
                 backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(255,255,255,0.4) 20px, rgba(255,255,255,0.4) 40px)',
             }}>
                 <Link href="/" style={{ display: 'flex', justifyContent: 'center' }}>
                     {/* Using standard img tag to bypass next/image caching of local replaced files */}
-                    <img src="/logo.png" alt="Wordle Logo" style={{ display: 'block', maxWidth: '300px', height: 'auto', objectFit: 'contain' }} />
+                    <img src="/logo.png" alt="Wordle Logo" style={{ display: 'block', maxWidth: 'var(--logo-width)', height: 'auto', objectFit: 'contain' }} />
                 </Link>
             </div>
 
@@ -34,7 +34,7 @@ export default async function KawaiiHeader() {
             <div style={{
                 background: 'var(--secondary)',
                 borderBottom: '4px solid var(--carrd-border)',
-                padding: '0.8rem 1rem',
+                padding: 'var(--nav-padding)',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',

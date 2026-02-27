@@ -6,9 +6,9 @@ export default function Keyboard({ onChar, onDelete, onEnter, usedColors }: { on
     ];
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', width: '100%', maxWidth: '500px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--key-gap)', width: '100%', maxWidth: '500px', margin: '0 auto' }}>
             {rows.map((row, i) => (
-                <div key={i} style={{ display: 'flex', justifyContent: 'center', gap: '0.4rem' }}>
+                <div key={i} style={{ display: 'flex', justifyContent: 'center', gap: 'var(--key-gap)' }}>
                     {row.map(key => {
                         const bgClass = usedColors[key] === 'CORRECT' ? 'var(--primary)' :
                             usedColors[key] === 'PRESENT' ? 'var(--secondary)' :
@@ -29,7 +29,7 @@ export default function Keyboard({ onChar, onDelete, onEnter, usedColors }: { on
                                 }}
                                 style={{
                                     flex: isAction ? 1.5 : 1,
-                                    height: '58px',
+                                    height: 'var(--key-height)',
                                     borderRadius: '16px', // Extra rounded for bubble feel
                                     border: '2px solid var(--carrd-border)',
                                     background: bgClass,

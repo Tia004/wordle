@@ -1,9 +1,33 @@
 "use client";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function LoadingScreen() {
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 1200);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (!isLoading) return null;
+
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', padding: '2rem 1rem' }}>
+        <div style={{ 
+            position: 'fixed',
+            inset: 0,
+            background: 'var(--carrd-bg)',
+            zIndex: 99999,
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            width: '100vw', 
+            height: '100vh',
+            padding: '2rem 1rem' 
+        }}>
             <style>{`
                 @keyframes kawaiiFill {
                     0% { background-color: transparent; transform: scale(1); }
